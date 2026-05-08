@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Product</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Product Name</label>
+        <input type="text" name="name" required>
+
+        <label>Description</label>
+        <textarea name="description" required></textarea>
+
+        <label>Price</label>
+        <input type="number" name="price" step="0.01" required>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" required>
+
+        <label>Category</label>
+        <input type="text" name="category" required>
+
+        <label>Product Image</label>
+        <input type="file" name="image">
+
+        <button type="submit">Add Product</button>
+    </form>
+
+    <br>
+    <a href="{% url 'product_list' %}">Back to Product List</a>
+</div>
+
+</body>
+</html>

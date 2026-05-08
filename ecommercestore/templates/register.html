@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin: 8px 0 15px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #c33764;
+            box-shadow: 0 0 5px rgba(195,55,100,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #c33764;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #a82d54;
+        }
+
+        .messages {
+            margin-bottom: 10px;
+        }
+
+        .messages p {
+            color: red;
+            font-size: 14px;
+        }
+
+        .link {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .link a {
+            color: #c33764;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+
+    <!-- Django Messages -->
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <label>Address</label>
+        <textarea name="location" required></textarea>
+
+        <label>Phone Number</label>
+        <input type="text" name="phone" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="link">
+        Already have an account? <a href="{% url 'login' %}">Login</a>
+    </div>
+</div>
+
+</body>
+</html>

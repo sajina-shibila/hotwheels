@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto px-4 py-6">
+
+    <!-- Title -->
+    <h1 class="text-2xl font-semibold mb-6">My Cart</h1>
+
+    {% if error %}
+        <div class="bg-red-100 text-red-600 p-4 rounded">
+            {{ error }}
+        </div>
+    {% else %}
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Cart Items -->
+        <div class="lg:col-span-2 space-y-4">
+
+            {% for item in cart_items %}
+            <div class="bg-white p-4 rounded shadow flex gap-4">
+
+                <!-- Product Image -->
+                <img src="{{ item.product.image.url }}" 
+                     class="w-24 h-24 object-cover rounded">
+
+                <!-- Details -->
+                <div class="flex-1">
+                    <h2 class="text-lg font-medium">
+                        {{ item.product.name }}
+                    </h2>
+
+                    <p class="text-gray-500 text-sm">
+                        {{ item.product.description|truncatewords:10 }}
+                    </p>
+
+                    <div class="mt-2 flex items-center gap-4">
+
+                        <!-- Price -->
+                        <span class="text-lg font-semibold text-black">
+                            ₹{{ item.product.price }}
+                        </span>
+
+                        <!-- Quantity -->
+                        <span class="text-gray-600">
+                            Qty: {{ item.quantity }}
+                        </span>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-3 flex gap-4 text-sm">
+                        <button class="text-blue-600 hover:underline">
+                            SAVE FOR LATER
+                        </button>
+                        <button class="text-red-500 hover:underline">
+                            REMOVE
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="text-right font-semibold">
+                    ₹{{ item.total_price }}
+                </div>
+
+            </div>
+            {% empty %}
+            <div class="bg-white p-6 rounded shadow text-center">
+                Your cart is empty
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Price Details -->
+        <div class="bg-white p-4 rounded shadow h-fit">
+
+            <h2 class="text-lg font-semibold mb-4">
+                PRICE DETAILS
+            </h2>
+
+            <div class="space-y-2 text-sm">
+
+                <div class="flex justify-between">
+                    <span>Price</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Discount</span>
+                    <span class="text-green-600">- ₹0</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Delivery Charges</span>
+                    <span class="text-green-600">FREE</span>
+                </div>
+
+                <hr>
+
+                <div class="flex justify-between font-semibold text-lg">
+                    <span>Total Amount</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+
+            </div>
+
+            <!-- Checkout Button -->
+            <button class="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded font-semibold">
+                PLACE ORDER
+            </button>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
